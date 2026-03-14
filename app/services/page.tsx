@@ -1,5 +1,4 @@
-import NoServiceCard from "@/components/NoServiceCard";
-import ServiceCard from "@/components/ServiceCard";
+import ServicesList from "@/components/ServicesList";
 import TryAgainButton from "@/components/TryAgainButton";
 import { getServices } from "@/lib/api";
 
@@ -28,7 +27,7 @@ export default async function ServicesScreen() {
     );
   }
 
-  const services = res?.data;
+  const services = res?.data || [];
 
   return (
     <main className="bg-light min-vh-100">
@@ -44,19 +43,7 @@ export default async function ServicesScreen() {
           </p>
         </header>
 
-        <div className="row g-4">
-          {!services || services.length === 0 ? (
-            <div className="col-12">
-              <NoServiceCard />
-            </div>
-          ) : (
-            services.map((service) => (
-              <article key={service.id} className="col-sm-6 col-md-4 col-lg-3">
-                <ServiceCard service={service} />
-              </article>
-            ))
-          )}
-        </div>
+        <ServicesList services={services} />
       </section>
     </main>
   );
