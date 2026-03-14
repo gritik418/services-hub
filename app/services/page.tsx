@@ -1,5 +1,6 @@
 import NoServiceCard from "@/components/NoServiceCard";
 import ServiceCard from "@/components/ServiceCard";
+import TryAgainButton from "@/components/TryAgainButton";
 import { getServices } from "@/lib/api";
 
 export const revalidate = 300;
@@ -9,12 +10,19 @@ export default async function ServicesScreen() {
 
   if (!res.success) {
     return (
-      <main>
+      <main className="bg-light min-vh-100 d-flex align-items-center">
         <section className="container py-5 text-center">
-          <h1 className="mb-3">Services</h1>
-          <p className="text-danger">
-            Failed to load services. Please try again later.
-          </p>
+          <div
+            className="bg-white p-5 rounded-4 shadow-sm mx-auto"
+            style={{ maxWidth: "600px" }}
+          >
+            <h1 className="display-6 fw-bold text-danger mb-3">Oops!</h1>
+            <p className="lead text-secondary mb-0">
+              Failed to load services. Please try again later.
+            </p>
+
+            <TryAgainButton />
+          </div>
         </section>
       </main>
     );
@@ -23,25 +31,27 @@ export default async function ServicesScreen() {
   const services = res?.data;
 
   return (
-    <main>
+    <main className="bg-light min-vh-100">
       <section className="container py-5">
-        <header className="mb-5 text-center">
-          <h1>Our Services</h1>
-          <p className="text-muted">
+        <header className="mb-5 text-center bg-white p-5 rounded-4 shadow-sm">
+          <h1 className="display-4 fw-bold text-dark mb-3">Our Services</h1>
+          <p
+            className="lead text-secondary mx-auto mb-0"
+            style={{ maxWidth: "600px" }}
+          >
             Explore the range of services we offer to help businesses grow and
             succeed.
           </p>
         </header>
 
-        <div className="row">
+        <div className="row g-4">
           {!services || services.length === 0 ? (
-            <NoServiceCard />
+            <div className="col-12">
+              <NoServiceCard />
+            </div>
           ) : (
             services.map((service) => (
-              <article
-                key={service.id}
-                className="col-sm-6 col-md-4 col-lg-3 mb-4"
-              >
+              <article key={service.id} className="col-sm-6 col-md-4 col-lg-3">
                 <ServiceCard service={service} />
               </article>
             ))
