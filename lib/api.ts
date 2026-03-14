@@ -8,11 +8,23 @@ interface GetServicesResponse {
 }
 
 export async function getServices(): Promise<GetServicesResponse> {
-  const res = await fetch(`${API_BASE_URL}/services`);
+  try {
+    const res = await fetch(`${API_BASE_URL}/services`);
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch services");
+    if (!res.ok) {
+      console.log("Failed to fetch services");
+      return {
+        success: false,
+        message: "Failed to fetch services",
+      };
+    }
+
+    return res.json();
+  } catch (error) {
+    console.log("Failed to fetch services", error);
+    return {
+      success: false,
+      message: "Failed to fetch services",
+    };
   }
-
-  return res.json();
 }
