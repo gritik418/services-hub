@@ -55,7 +55,7 @@ Data is fetched server-side in the Next.js App Router using the native `fetch` A
 #### What you did to ensure SEO & performance
 
 - **SEO Elements**: Implemented semantic HTML layout (`<main>`, `<section>`, `<article>`) and utilized Next.js `Metadata` to define robust page titles and meta descriptions.
-- **Performance Implementations**: Opted for Server-Side Rendering (SSR) via Server Components which significantly trims down the client-side JavaScript sent to the browser.
+- **Performance Implementations**: Used Server Components with Incremental Static Regeneration (ISR) to reduce client-side JavaScript and keep the page fast.
 
 ### 4. API Thinking (Critical)
 
